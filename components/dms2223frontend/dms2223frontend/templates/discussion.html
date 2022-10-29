@@ -3,6 +3,23 @@
 {% block contentheading %}Discussions panel{% endblock %}
 {% block maincontent %}
     {% block discussioncontent %}
-    <p class="yellowbg">Under construction</p>
+        <ul>
+        {% for question in questions %}
+            <li class="questiondiv">{{ question.title }}
+                {{ question.texto }}
+            <ul>
+            {% for answer in question.getChilds() %}
+                <li>{{ answer.texto }}
+                <ul>
+                {% for comment in answer.getChilds() %}
+                    <li>{{ comment.texto }}</li>
+                {% endfor %}
+                </ul>
+                </li>
+            {% endfor %}
+            </ul>
+            </li>
+        {% endfor %}
+        </ul>
     {% endblock %}
 {% endblock %}
