@@ -87,7 +87,7 @@ a {
 }
 
 #contentheader {
-    padding: 1em;
+    padding: 0.5em;
     margin: 0;
     box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
 }
@@ -211,3 +211,40 @@ table th {
     font-size: smaller;
     color: #777;
 }
+
+.questioncard{
+    background: #ffffff;
+    color:rgb(255, 255, 255);
+    width: 600px;
+    height: auto;
+    word-wrap: break-word;
+    padding: 15px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.377);
+    border-radius: 10px;
+}
+
+.answercard{
+    background: #ffffff;
+    color:rgb(255, 255, 255);
+    width: 600px;
+    word-wrap: break-word;
+    padding: 15px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.377);
+    border-radius: 10px;
+}
+
+.commentcard{
+    background: #ffffff;
+    color:rgb(255, 255, 255);
+    width: 600px;
+    height: auto;
+    word-wrap: break-word;
+    padding: 15px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.377);
+    border-radius: 10px;
+}
+
+li {
+    list-style-type: none;
+}
+
