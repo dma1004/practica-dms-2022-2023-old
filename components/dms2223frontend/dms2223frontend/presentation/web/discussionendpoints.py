@@ -17,12 +17,12 @@ class DiscussionEndpoints():
     """
 
     @staticmethod
-    def preguntas() -> [Question]:
+    def preguntas():
         questions = [Question("Arturo", "¿Aprobamos?", "Buenas tardes"),
                      Question("Asterix", "¿Suspendemos?", "Buenas noches")]
-        questions[0].addChild(Answer("Obelix", "Hola"))
-        questions[1].addChild(Answer("Pedro", "Adiós"))
-        questions[0].getChilds()[0].addChild(Comment("Ángel", "Te equivocas", Feedback.NEGATIVE))
+        questions[0].addAnswer(Answer("Obelix", "Hola"))
+        questions[1].addAnswer(Answer("Pedro", "Adiós"))
+        questions[0].getAnswers()[0].addComment(Comment("Ángel", "Te equivocas", Feedback.NEGATIVE))
 
         return questions
 

@@ -1,18 +1,28 @@
-from dms2223common.data.discussion.discussion_component import DiscussionComponent
-from dms2223common.data.discussion.discussion_composite import DiscussionComposite
+from datetime import datetime
 
+from dms2223common.data.discussion.comment import Comment
 
-class Answer(DiscussionComposite):
+class Answer():
 
     def __init__(self, autor, texto):
-        super().__init__(autor, texto)
+        self.autor = autor
+        self.texto = texto
+        self.tiempo = datetime.now()
+        self.visible = True
         self.votes = 0
+        self.comentarios = list()
 
     def voteUp(self):
         self.votes += 1
 
     def voteDown(self):
         self.votes -= 1
+    
+    def addCommet(self, comment: Comment):
+        self.comentarios.append(comment)
 
-    def addChild(self, child: DiscussionComponent):
-        self.childs.append(child)
+    def getComments(self):
+        return self.comentarios
+
+    def changeVisibility(self):
+        self.visible = not self.visible

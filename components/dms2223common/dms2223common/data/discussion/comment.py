@@ -1,5 +1,5 @@
-from dms2223common.data.discussion.discussion_component import DiscussionComponent
 from enum import Enum
+from datetime import datetime
 
 
 class Feedback(Enum):
@@ -10,10 +10,13 @@ class Feedback(Enum):
     NEUTRAL = 3
 
 
-class Comment(DiscussionComponent):
+class Comment():
 
     def __init__(self, autor, texto, feedback: Feedback):
-        super().__init__(autor, texto)
+        self.autor = autor
+        self.texto = texto
+        self.tiempo = datetime.now()
+        self.visible = True
         self.feedback = feedback
         self.votes = 0
 
@@ -22,3 +25,6 @@ class Comment(DiscussionComponent):
 
     def voteDown(self):
         self.votes -= 1
+    
+    def changeVisibility(self):
+        self.visible = not self.visible
