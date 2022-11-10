@@ -18,7 +18,7 @@ class Answer():
     def voteDown(self):
         self.votes -= 1
     
-    def addCommet(self, comment: Comment):
+    def addComment(self, comment: Comment):
         self.comentarios.append(comment)
 
     def getComments(self):

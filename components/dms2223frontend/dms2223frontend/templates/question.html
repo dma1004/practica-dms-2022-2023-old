@@ -8,24 +8,24 @@
 {% endblock %}
 {% block maincontent %}
     {% block discussioncontent %}
-        <div class="questioncard">
-            <div>
-                <p style="color: black">{{ text }} Mensaje largo</p>
-            </div>
+        <div>
+            <p style="color: black">{{ text }} Mensaje largo</p>
+            <hr />
         </div>
         <br>
-        {% for answer in question.getChilds() %}
+        {% for answer in question.getAnswers() %}
             <li>
-                <div class="answercard">
-                    <div>
+                <div class="questioncard">
+                    <div class="questionmsg">
                         <p style="color: black">{{ answer.texto }}</p>
                     </div>
-                    <div>
+                    <div class="votes">
                         <p style="color: black;">{{ answer.votes }}</p>
                     </div>
                 </div>
+
                 <ul style="margin-top: 0">
-                    {% for comment in answer.getChilds() %}
+                    {% for comment in answer.getComments() %}
                         <li>
                             <div class="commentcard">
                                 <div>
