@@ -1,9 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction:column;
     min-height: 100vh;
-    position:relative;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 div {
@@ -16,7 +20,6 @@ a {
 
 
 #page-top {
-    height: 1em;
     padding: 0.5em;
     font-size: 90%;
     background-color: #333;
@@ -51,17 +54,19 @@ a {
     margin: 0 0.5em;
 }
 
+#page-content {
+    flex: 1;
+    position: relative;
+}
+
 #footer {
     padding: 1em;
     background-color: #eee;
     border-top: 2px solid #ddd;
-    margin-top: 1em;
     font-size: smaller;
     color: #777;
-    position:absolute;
     bottom: 0;
     width: 100%;
-    box-sizing: border-box;
 }
 
 #footer p {
@@ -69,10 +74,10 @@ a {
 }
 
 #flashedmessages {
+    position: absolute;
     padding: 0.2em 0;
     border-radius: 2em  2em 0 0;
     z-index: 100;
-    position: fixed;
     bottom: 0;
     margin: auto;
     width: 100%;
