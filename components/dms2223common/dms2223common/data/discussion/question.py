@@ -1,14 +1,24 @@
-from dms2223common.data.discussion.comment import Comment
-from dms2223common.data.discussion.discussion_component import DiscussionComponent
-from dms2223common.data.discussion.discussion_composite import DiscussionComposite
 
 
-class Question(DiscussionComposite):
+from datetime import datetime
+from dms2223common.data.discussion.answer import Answer
+
+
+class Question():
 
     def __init__(self, autor, title, texto):
-        super().__init__(autor, texto)
+        self.autor = autor
+        self.texto = texto
+        self.tiempo = datetime.now()
+        self.visible = True
         self.title = title
+        self.respuestas = list()
 
-    def addChild(self, child: DiscussionComponent):
-        if not isinstance(child, Question) and not isinstance(child, Comment):
-            self.childs.append(child)
+    def addAnswer(self, child: Answer):
+        self.respuestas.append(child)
+
+    def getAnswers(self):
+        return self.respuestas
+
+    def changeVisibility(self):
+        self.visible = not self.visible

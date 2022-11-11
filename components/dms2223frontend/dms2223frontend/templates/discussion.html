@@ -4,22 +4,17 @@
 {% block maincontent %}
     {% block discussioncontent %}
         <ul>
-        {% for question in questions %}
-            <li class="questiondiv">{{ question.title }}
-                {{ question.texto }}
-            <ul>
-            {% for answer in question.getChilds() %}
-                <li>{{ answer.texto }}
-                <ul>
-                {% for comment in answer.getChilds() %}
-                    <li>{{ comment.texto }}</li>
-                {% endfor %}
-                </ul>
+            {% set count = namespace(value=0) %}
+            {% for question in questions %}
+                <li>
+                    <td class="alignleft">
+                        <div class="questiondiv">
+                            <a href="/discussion/question?question={{ count.value }}">{{ question.title }}</a>
+                        </div>
+                    </td>
                 </li>
+                {% set count.value = count.value + 1 %}
             {% endfor %}
-            </ul>
-            </li>
-        {% endfor %}
         </ul>
     {% endblock %}
 {% endblock %}
