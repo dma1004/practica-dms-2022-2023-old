@@ -13,32 +13,66 @@
             <hr />
         </div>
         <br>
+        {% set c_answer = namespace(value=0) %}
         {% for answer in question.getAnswers() %}
             <li>
-                <div class="questioncard">
-                    <div class="questionmsg">
+                <div class="answercard">
+                    <div class="answermsg">
                         <p style="color: black">{{ answer.texto }}</p>
                     </div>
-                    <div class="votes">
+                    <div class="bottomright">
+                        <form method="post" action="/discussion/question">
+                            <input type="hidden" value="voteanswer" name="type" />
+                            <input type="hidden" value="{{ n_question }}" name="questionnumber" />
+                            <input type="hidden" value="{{ c_answer.value }}" name="answernumber" />
+                            <input type="hidden" value="UP" name="action" />
+                            <input class="emoji" type="submit" value="&#x1F44D;" name="isupanswer" />
+                        </form>
                         <p style="color: black;">{{ answer.votes }}</p>
+                        <form method="post" action="/discussion/question">
+                            <input type="hidden" value="voteanswer" name="type" />
+                            <input type="hidden" value="{{ n_question }}" name="questionnumber" />
+                            <input type="hidden" value="{{ c_answer.value }}" name="answernumber" />
+                            <input type="hidden" value="DOWN" name="action" />
+                            <input class="emoji" type="submit" value="&#x1F44E;" name="isdownanswer" />
+                        </form>
                     </div>
                 </div>
 
                 <ul style="margin-top: 0">
+                    {% set c_comment = namespace(value=0) %}
                     {% for comment in answer.getComments() %}
                         <li>
                             <div class="commentcard">
-                                <div>
+                                <div class="commentnmsg">
                                     <p style="color: black">{{ comment.texto }}</p>
                                 </div>
-                                <div>
-                                    <p style="color: black;">{{ answer.votes }}</p>
+                                <div class="bottomright">
+                                    <form method="post" action="/discussion/question">
+                                        <input type="hidden" value="votecomment" name="type" />
+                                        <input type="hidden" value="{{ n_question }}" name="questionnumber" />
+                                        <input type="hidden" value="{{ c_answer.value }}" name="answernumber" />
+                                        <input type="hidden" value="{{ c_comment.value }}" name="commentnumber" />
+                                        <input type="hidden" value="UP" name="action" />
+                                        <input class="emoji" type="submit" value="&#x1F44D;" name="isupcomment" />
+                                    </form>
+                                    <p style="color: black;">{{ comment.votes }}</p>
+                                    <form method="post" action="/discussion/question">
+                                        <input type="hidden" value="votecomment" name="type" />
+                                        <input type="hidden" value="{{ n_question }}" name="questionnumber" />
+                                        <input type="hidden" value="{{ c_answer.value }}" name="answernumber" />
+                                        <input type="hidden" value="{{ c_comment.value }}" name="commentnumber" />
+                                        <input type="hidden" value="DOWN" name="action" />
+                                        <input class="emoji" type="submit" value="&#x1F44E;" name="isdowncomment" />
+                                    </form>
                                 </div>
                             </div>
                         </li>
+                        {% set c_comment.value = c_comment.value + 1 %}
                     {% endfor %}
                 </ul>
             </li>
+            {% set c_answer.value = c_answer.value + 1 %}
         {% endfor %}
     {% endblock %}
 {% endblock %}

@@ -10,7 +10,7 @@ class Feedback(Enum):
     NEUTRAL = 3
 
 
-class Comment():
+class Comment:
 
     def __init__(self, autor, texto, feedback: Feedback):
         self.autor = autor
@@ -19,6 +19,8 @@ class Comment():
         self.visible = True
         self.feedback = feedback
         self.votes = 0
+        self.votesupusers = set()
+        self.votesdownusers = set()
 
     def voteUp(self):
         self.votes += 1

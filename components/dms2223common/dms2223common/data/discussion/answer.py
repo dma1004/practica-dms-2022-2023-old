@@ -2,7 +2,7 @@ from datetime import datetime
 
 from dms2223common.data.discussion.comment import Comment
 
-class Answer():
+class Answer:
 
     def __init__(self, autor, texto):
         self.autor = autor
@@ -11,6 +11,8 @@ class Answer():
         self.visible = True
         self.votes = 0
         self.comentarios = list()
+        self.votesupusers = set()
+        self.votesdownusers = set()
 
     def voteUp(self):
         self.votes += 1
