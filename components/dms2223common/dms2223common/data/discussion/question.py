@@ -4,7 +4,7 @@ from datetime import datetime
 from dms2223common.data.discussion.answer import Answer
 
 
-class Question():
+class Question:
 
     def __init__(self, autor, title, texto):
         self.autor = autor

@@ -10,7 +10,7 @@ class Feedback(Enum):
     NEUTRAL = 3
 
 
-class Comment():
+class Comment:
 
     def __init__(self, autor, texto, feedback: Feedback):
         self.autor = autor
