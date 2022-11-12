@@ -19,6 +19,8 @@ class Comment():
         self.visible = True
         self.feedback = feedback
         self.votes = 0
+        self.votesupusers = set()
+        self.votesdownusers = set()
 
     def voteUp(self):
         self.votes += 1

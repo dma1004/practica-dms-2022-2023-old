@@ -11,6 +11,8 @@ class Answer():
         self.visible = True
         self.votes = 0
         self.comentarios = list()
+        self.votesupusers = set()
+        self.votesdownusers = set()
 
     def voteUp(self):
         self.votes += 1
