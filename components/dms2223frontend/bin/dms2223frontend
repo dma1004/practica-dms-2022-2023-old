@@ -39,53 +39,66 @@ app.secret_key = bytes(cfg.get_app_secret_key(), 'ascii')
 def get_login():
     return SessionEndpoints.get_login(auth_service)
 
+
 @app.route("/login", methods=['POST'])
 def post_login():
     return SessionEndpoints.post_login(auth_service)
+
 
 @app.route("/logout", methods=['GET'])
 def get_logout():
     return SessionEndpoints.get_logout()
 
+
 @app.route("/home", methods=['GET'])
 def get_home():
     return CommonEndpoints.get_home(auth_service)
+
 
 @app.route("/discussion", methods=['GET'])
 def get_discussion():
     return DiscussionEndpoints.get_discussion(auth_service)
 
-@app.route("/discussion/questions", methods=['GET','POST'])
+
+@app.route("/discussion/questions", methods=['GET', 'POST'])
 def get_question():
-    return QuestionEndpoints.get_questions(auth_service,backend_service)
+    return QuestionEndpoints.get_questions(backend_service)
+
 
 @app.route("/moderator", methods=['GET'])
 def get_moderator():
     return ModeratorEndpoints.get_moderator(auth_service)
 
+
 @app.route("/admin", methods=['GET'])
 def get_admin():
     return AdminEndpoints.get_admin(auth_service)
+
 
 @app.route("/admin/users", methods=['GET'])
 def get_admin_users():
     return AdminEndpoints.get_admin_users(auth_service)
 
+
 @app.route("/admin/users/new", methods=['GET'])
 def get_admin_users_new():
     return AdminEndpoints.get_admin_users_new(auth_service)
+
 
 @app.route("/admin/users/new", methods=['POST'])
 def post_admin_users_new():
     return AdminEndpoints.post_admin_users_new(auth_service)
 
+
 @app.route("/admin/users/edit", methods=['GET'])
 def get_admin_users_edit():
     return AdminEndpoints.get_admin_users_edit(auth_service)
 
+
 @app.route("/admin/users/edit", methods=['POST'])
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
+
 
 if __name__ == '__main__':
     app.run(

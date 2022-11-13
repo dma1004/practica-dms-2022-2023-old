@@ -15,4 +15,4 @@ QUESTIONS_DB = {
 
 
 def list_questions():
-    return {'questions': list(QUESTIONS_DB.values())}, HTTPStatus.OK
+    return list(QUESTIONS_DB.values()), HTTPStatus.OK
