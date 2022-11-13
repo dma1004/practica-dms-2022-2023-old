@@ -1,8 +1,31 @@
 #!/usr/bin/env python3
+import os
+import inspect
+import connexion
+from flask import current_app
+from connexion.apps.flask_app import FlaskJSONEncoder
+import dms2223backend
+from dms2223backend.data.config import BackendConfiguration
 
-import time
+if __name__ == '__main__':
+    cfg: BackendConfiguration = BackendConfiguration()
+    cfg.load_from_file(cfg.default_config_file())
 
-print("This file is a stub. Replace this behaviour with the actual service code.")
+    specification_dir = os.path.dirname(
+        inspect.getfile(dms2223backend)) + '/openapi'
+    app = connexion.FlaskApp(
+        __name__,
+        specification_dir=specification_dir,
+        options={
+            "swagger_ui": True,
+            "serve_spec": True
+        }
+    )
+    app.add_api("spec.yml", strict_validation=True)
+    flask_app = app.app
+    with flask_app.app_context():
+        current_app.cfg = cfg
 
-while True:
-    time.sleep(1)
+    flask_app.json_encoder = FlaskJSONEncoder
+
+    app.run()

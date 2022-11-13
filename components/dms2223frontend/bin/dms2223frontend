@@ -8,7 +8,7 @@ import dms2223frontend
 from dms2223frontend.data.config import FrontendConfiguration
 from dms2223frontend.data.rest import AuthService, BackendService
 from dms2223frontend.presentation.web import \
-    AdminEndpoints, CommonEndpoints, SessionEndpoints, DiscussionEndpoints, ModeratorEndpoints
+    AdminEndpoints, CommonEndpoints, SessionEndpoints, DiscussionEndpoints, ModeratorEndpoints, QuestionEndpoints
 
 cfg: FrontendConfiguration = FrontendConfiguration()
 cfg.load_from_file(cfg.default_config_file())
@@ -55,9 +55,9 @@ def get_home():
 def get_discussion():
     return DiscussionEndpoints.get_discussion(auth_service)
 
-@app.route("/discussion/question", methods=['GET','POST'])
+@app.route("/discussion/questions", methods=['GET','POST'])
 def get_question():
-    return DiscussionEndpoints.get_question(auth_service)
+    return QuestionEndpoints.get_questions(auth_service,backend_service)
 
 @app.route("/moderator", methods=['GET'])
 def get_moderator():

@@ -80,3 +80,5 @@ class WebUser():
             session.get('token'), username, roles)
         WebUtils.flash_response_messages(response)
         return response.is_successful()
+
+

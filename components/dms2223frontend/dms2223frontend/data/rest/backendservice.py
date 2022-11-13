@@ -2,6 +2,7 @@
 """
 
 import requests
+from typing import Optional
 from dms2223common.data import Role
 from dms2223common.data.rest import ResponseData
 
@@ -11,11 +12,11 @@ class BackendService():
     """
 
     def __init__(self,
-        host: str, port: int,
-        api_base_path: str = '/api/v1',
-        apikey_header: str = 'X-ApiKey-Backend',
-        apikey_secret: str = ''
-        ):
+                 host: str, port: int,
+                 api_base_path: str = '/api/v1',
+                 apikey_header: str = 'X-ApiKey-Backend',
+                 apikey_secret: str = ''
+                 ):
         """ Constructor method.
 
         Initializes the client.
@@ -35,5 +36,23 @@ class BackendService():
 
     def __base_url(self) -> str:
         return f'http://{self.__host}:{self.__port}{self.__api_base_path}'
+
+    def list_questions(self, token: Optional[str]) -> ResponseData:
+        response_data: ResponseData = ResponseData()
+        response: requests.Response = requests.get(
+            self.__base_url() + '/questions',
+            headers={
+                'Authorization': f'Bearer {token}',
+                self.__apikey_header: self.__apikey_secret
+            },
+            timeout=60
+        )
+        response_data.set_successful(response.ok)
+        if response_data.is_successful():
+            response_data.set_content(response.json())
+        else:
+            response_data.add_message(response.content.decode('ascii'))
+            response_data.set_content([])
+        return response_data
 
     # TODO: Implement
