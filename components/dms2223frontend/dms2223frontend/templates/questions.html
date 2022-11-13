@@ -3,16 +3,16 @@
 {% block contentheading %}Discussions panel{% endblock %}
 {% block maincontent %}
     <ul>
-        {% set count = namespace(value=0) %}
+        {% set qid = namespace(value=0) %}
         {% for question in questions %}
             <li>
                 <td class="alignleft">
                     <div class="questiondiv">
-                        <a href="/discussion/question?question={{ count.value }}&redirect_to=/dicussion">{{ question['title'] }}</a>
+                        <a href="/discussion/questions/question?question={{ qid.value }}">{{ question['title'] }}</a>
                     </div>
                 </td>
             </li>
-            {% set count.value = count.value + 1 %}
+            {% set qid.value = qid.value + 1 %}
         {% endfor %}
     </ul>
 {% endblock %}

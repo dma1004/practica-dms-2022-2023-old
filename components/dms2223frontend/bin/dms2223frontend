@@ -60,9 +60,13 @@ def get_discussion():
     return DiscussionEndpoints.get_discussion(auth_service)
 
 
-@app.route("/discussion/questions", methods=['GET', 'POST'])
-def get_question():
+@app.route("/discussion/questions", methods=['GET'])
+def get_questions():
     return QuestionEndpoints.get_questions(backend_service)
+
+@app.route("/discussion/questions/question", methods=['GET','POST'])
+def get_question():
+    return QuestionEndpoints.get_question(backend_service)
 
 
 @app.route("/moderator", methods=['GET'])

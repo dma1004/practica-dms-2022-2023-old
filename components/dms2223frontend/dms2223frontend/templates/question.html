@@ -1,37 +1,37 @@
 {% extends "base_logged_in.html" %}
 {% block title %}{% block subtitle %}{% endblock %}Discussion{% endblock %}
 {% block contentheading %}
-    {{ question.title }}
+    {{ question['title'] }}
 {% endblock %}
 {% block contentsubheading %}
-    <small>Date: {{ question.tiempo }} Author: {{ question.autor }}</small>
+    <small>Date: {{ question['timestamp'] }} Author: {{ question['owner']['username'] }}</small>
 {% endblock %}
 {% block maincontent %}
     {% block discussioncontent %}
         <div>
-            <p style="color: black">{{ text }} Mensaje largo</p>
+            <p style="color: black">{{ question['body'] }} Mensaje largo</p>
             <hr />
         </div>
         <br>
         {% set c_answer = namespace(value=0) %}
-        {% for answer in question.getAnswers() %}
+        {% for answer in answers %}
             <li>
                 <div class="answercard">
                     <div class="answermsg">
-                        <p style="color: black">{{ answer.texto }}</p>
+                        <p style="color: black">{{ answer['body'] }}</p>
                     </div>
                     <div class="bottomright">
                         <form method="post" action="/discussion/question">
                             <input type="hidden" value="voteanswer" name="type" />
-                            <input type="hidden" value="{{ n_question }}" name="questionnumber" />
+                            <input type="hidden" value="{{ question['qid'] }}" name="questionnumber" />
                             <input type="hidden" value="{{ c_answer.value }}" name="answernumber" />
                             <input type="hidden" value="UP" name="action" />
                             <input class="emoji" type="submit" value="&#x1F44D;" name="isupanswer" />
                         </form>
-                        <p style="color: black;">{{ answer.votes }}</p>
+                        <p style="color: black;">{{ answer['votes'] }}</p>
                         <form method="post" action="/discussion/question">
                             <input type="hidden" value="voteanswer" name="type" />
-                            <input type="hidden" value="{{ n_question }}" name="questionnumber" />
+                            <input type="hidden" value="{{ question['qid'] }}" name="questionnumber" />
                             <input type="hidden" value="{{ c_answer.value }}" name="answernumber" />
                             <input type="hidden" value="DOWN" name="action" />
                             <input class="emoji" type="submit" value="&#x1F44E;" name="isdownanswer" />
@@ -41,25 +41,25 @@
 
                 <ul style="margin-top: 0">
                     {% set c_comment = namespace(value=0) %}
-                    {% for comment in answer.getComments() %}
+                    {% for comment in answer['comments'] %}
                         <li>
                             <div class="commentcard">
                                 <div class="commentnmsg">
-                                    <p style="color: black">{{ comment.texto }}</p>
+                                    <p style="color: black">{{ comment['body'] }}</p>
                                 </div>
                                 <div class="bottomright">
                                     <form method="post" action="/discussion/question">
                                         <input type="hidden" value="votecomment" name="type" />
-                                        <input type="hidden" value="{{ n_question }}" name="questionnumber" />
+                                        <input type="hidden" value="{{ question['qid'] }}" name="questionnumber" />
                                         <input type="hidden" value="{{ c_answer.value }}" name="answernumber" />
                                         <input type="hidden" value="{{ c_comment.value }}" name="commentnumber" />
                                         <input type="hidden" value="UP" name="action" />
                                         <input class="emoji" type="submit" value="&#x1F44D;" name="isupcomment" />
                                     </form>
-                                    <p style="color: black;">{{ comment.votes }}</p>
+                                    <p style="color: black;">{{ comment['votes']}}</p>
                                     <form method="post" action="/discussion/question">
                                         <input type="hidden" value="votecomment" name="type" />
-                                        <input type="hidden" value="{{ n_question }}" name="questionnumber" />
+                                        <input type="hidden" value="{{ question['qid'] }}" name="questionnumber" />
                                         <input type="hidden" value="{{ c_answer.value }}" name="answernumber" />
                                         <input type="hidden" value="{{ c_comment.value }}" name="commentnumber" />
                                         <input type="hidden" value="DOWN" name="action" />
