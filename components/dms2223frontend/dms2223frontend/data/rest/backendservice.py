@@ -14,7 +14,7 @@ class BackendService():
     def __init__(self,
                  host: str, port: int,
                  api_base_path: str = '/api/v1',
-                 apikey_header: str = 'X-ApiKey-Backend',
+                 apikey_header: str = 'X-ApiKey-Auth',
                  apikey_secret: str = ''
                  ):
         """ Constructor method.

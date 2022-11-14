@@ -61,10 +61,9 @@ paths:
       tags:
         - discussion
         - questions
- #     security:
- #       - user_token: []
- #         api_key: []
-  # TODO: POST
+      security:
+        - user_token: []
+          api_key: []
 
   /questions/{qid}:
     get:
@@ -96,9 +95,9 @@ paths:
       tags:
         - discussion
         - questions
-  #    security:
-  #      - user_token: [ ]
-  #        api_key: [ ]
+      security:
+        - user_token: [ ]
+          api_key: [ ]
 
   /questions/{qid}/answers:
     get:
@@ -190,9 +189,9 @@ paths:
         - discussion
         - questions
         - answers
-  #    security:
-  #      - user_token: [ ]
-  #        api_key: [ ]
+      security:
+        - user_token: [ ]
+          api_key: [ ]
   # TODO: POST
 components:
   schemas:

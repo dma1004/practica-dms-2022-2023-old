@@ -21,7 +21,7 @@ auth_service: AuthService = AuthService(
 backend_service_cfg: Dict = cfg.get_backend_service()
 backend_service: BackendService = BackendService(
     backend_service_cfg['host'], backend_service_cfg['port'],
-    apikey_header='X-ApiKey-Backend',
+    apikey_header='X-ApiKey-Auth',
     apikey_secret=backend_service_cfg['apikey_secret']
 )
 

@@ -1,3 +1,4 @@
+import sys
 from typing import Dict
 
 import requests
@@ -30,7 +31,7 @@ def verify_token(token: str) -> Dict:
     auth_service_cfg = current_app.cfg.get_auth_service()
     base_url = f'http://{auth_service_cfg["host"]}:{auth_service_cfg["port"]}/api/v1'
 
-    response: requests.Response = requests.post(
+    response: requests.Response = requests.get(
         base_url + f'/auth',
         headers={
             'Authorization': f'Bearer {token}',
@@ -38,5 +39,8 @@ def verify_token(token: str) -> Dict:
         },
         timeout=60
     )
-    # TODO: Cambiar
-    return {}
+
+    if not response.ok:
+        raise Unauthorized("Invalid user token")
+
+    return response.json()
